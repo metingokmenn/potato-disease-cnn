@@ -1,0 +1,19 @@
+# Dataset
+dataset/
+
+# Results
+results/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
