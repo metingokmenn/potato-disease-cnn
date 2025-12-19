@@ -16,7 +16,8 @@ class Config:
     # --- EĞİTİM HİPERPARAMETRELERİ (SAVAŞ MODU) ---
     # RTX 3060 (12GB VRAM) için 32 güvenlidir. 
     # Eğer "OOM (Out of Memory)" hatası almazsanız 64 yapıp hızı artırabilirsiniz.
-    BATCH_SIZE = 32
+    # BATCH_SIZE = 32 ile denendi ve Out of Memory hatası alındı.
+    BATCH_SIZE = 16
     
     # Epoch sayısını yüksek tutuyoruz (50). 
     # Merak etmeyin, main.py içindeki "EarlyStopping" sayesinde 

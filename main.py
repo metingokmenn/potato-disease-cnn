@@ -1,5 +1,11 @@
 import tensorflow as tf
+
+tf.get_logger().setLevel('ERROR')
+
 import os
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 from config import Config
 from data_loader import load_data
 from models import build_model

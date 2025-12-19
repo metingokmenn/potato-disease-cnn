@@ -46,12 +46,13 @@ def load_data():
         val_ds = val_and_test_ds.skip(test_size)
         
         print(f"Veri Dağılımı: Eğitim: %80 | Doğrulama: %10 | Test: %10")
-
+    
     # 3. Performans Optimizasyonu
+    # train val ve test için cache kullanıldığında RAM yetmedi.
     AUTOTUNE = tf.data.AUTOTUNE
-    train_ds = train_ds.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
-    val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
-    test_ds = test_ds.cache().prefetch(buffer_size=AUTOTUNE)
+    train_ds = train_ds.shuffle(1000).prefetch(buffer_size=AUTOTUNE)
+    val_ds = val_ds.prefetch(buffer_size=AUTOTUNE)
+    test_ds = test_ds.prefetch(buffer_size=AUTOTUNE)
 
     # Artık 3 parça döndürüyoruz
     return train_ds, val_ds, test_ds, class_names
