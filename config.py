@@ -22,7 +22,7 @@ class Config:
     # Epoch sayısını yüksek tutuyoruz (50). 
     # Merak etmeyin, main.py içindeki "EarlyStopping" sayesinde 
     # model öğrenmeyi durdurursa (örn. 20. epochta) eğitim otomatik bitecektir.
-    EPOCHS = 50           
+    EPOCHS = 30           
     
     # Başlangıç öğrenme hızı
     LEARNING_RATE = 0.001
@@ -38,7 +38,7 @@ class Config:
     
     # Model Seçimi: 'custom_cnn' (Kendi modelimiz) veya 'mobilenet' (Transfer Learning)
     # Önce kendi modelimizi eğitiyoruz.
-    MODEL_TYPE = 'custom_cnn' 
+    MODEL_TYPE = 'mobilenet' 
     
     # --- KRİTİK AYARLAR ---
     # Tam eğitim için BURASI MUTLAKA FALSE OLMALI
