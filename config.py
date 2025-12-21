@@ -1,52 +1,99 @@
 import os
 
 class Config:
-    # --- DOSYA YOLLARI ---
-    # Windows'ta klasör yapınızın "dataset" şeklinde olduğundan emin olun
+    """
+    Proje yapılandırma sınıfı.
+    
+    Bu sınıf, patates hastalığı sınıflandırma projesi için tüm yapılandırma 
+    parametrelerini içerir. Dosya yolları, görüntü ayarları, eğitim 
+    hiperparametreleri ve model seçenekleri burada tanımlanır.
+    """
+    
     DATASET_DIR = "dataset"
+    """
+    str: Veri setinin bulunduğu klasör yolu.
+         Windows'ta klasör yapısının "dataset" şeklinde olduğundan emin olun.
+    """
+    
     RESULTS_DIR = "results"
+    """
+    str: Eğitim sonuçlarının (modeller, grafikler, raporlar) kaydedileceği klasör yolu.
+    """
     
-    # --- GÖRÜNTÜ AYARLARI ---
-    # 224x224, ResNet ve MobileNet gibi modellerin standart giriş boyutudur
     IMG_HEIGHT = 224
+    """
+    int: Görüntülerin yüksekliği (piksel).
+         224x224, ResNet ve MobileNet gibi modellerin standart giriş boyutudur.
+    """
+    
     IMG_WIDTH = 224
+    """
+    int: Görüntülerin genişliği (piksel).
+         224x224, ResNet ve MobileNet gibi modellerin standart giriş boyutudur.
+    """
+    
     CHANNELS = 3
+    """
+    int: Görüntü kanal sayısı (RGB için 3).
+    """
+    
     IMG_SIZE = (IMG_HEIGHT, IMG_WIDTH)
-    
-    # --- EĞİTİM HİPERPARAMETRELERİ (SAVAŞ MODU) ---
-    # RTX 3060 (12GB VRAM) için 32 güvenlidir. 
-    # Eğer "OOM (Out of Memory)" hatası almazsanız 64 yapıp hızı artırabilirsiniz.
-    # BATCH_SIZE = 32 ile denendi ve Out of Memory hatası alındı.
+    """
+    tuple: Görüntü boyutu (yükseklik, genişlik) tuple'ı.
+    """
+
     BATCH_SIZE = 16
+    """
+    int: Eğitim sırasında kullanılacak batch (toplu işlem) boyutu.
+         RTX 3060 (12GB VRAM) için 32 güvenlidir. 
+         Eğer "OOM (Out of Memory)" hatası almazsanız 64 yapıp hızı artırabilirsiniz.
+         BATCH_SIZE = 32 ile denendi ve Out of Memory hatası alındı.
+    """
     
-    # Epoch sayısını yüksek tutuyoruz (50). 
-    # Merak etmeyin, main.py içindeki "EarlyStopping" sayesinde 
-    # model öğrenmeyi durdurursa (örn. 20. epochta) eğitim otomatik bitecektir.
-    EPOCHS = 30           
     
-    # Başlangıç öğrenme hızı
+    EPOCHS = 30
+    """
+    int: Eğitim sırasında kullanılacak maksimum epoch (dönem) sayısı.
+         Epoch sayısını yüksek tutuyoruz.
+         main.py içindeki EarlyStopping callback sayesinde model öğrenmeyi durdurursa eğitim otomatik bitecektir.
+    """
+    
     LEARNING_RATE = 0.001
+    """
+    float: Başlangıç öğrenme hızı (learning rate).
+           Modelin ağırlıklarını güncellerken kullanılan adım büyüklüğü.
+    """
     
-    # --- OPTİMİZASYON VE MODEL ---
-    # Seçenekler: 'adam', 'sgd_momentum', 'rmsprop'
-    # İlk deneme (Baseline) için 'adam' kullanın.
-    # İkinci deneme için bunu 'sgd_momentum' yapıp tekrar çalıştırın.
-    OPTIMIZER = 'adam'    
+
+    OPTIMIZER = 'adam'
+    """
+    str: Kullanılacak optimizasyon algoritması.
+         Seçenekler: 'adam', 'sgd_momentum', 'rmsprop'
+    """
     
-    # SGD kullanırsanız bu momentum değeri devreye girer
-    MOMENTUM = 0.9        
+    MOMENTUM = 0.9
+    """
+    float: SGD optimizasyonu için momentum değeri (0.0 ile 1.0 arası).
+    """
     
-    # Model Seçimi: 'custom_cnn' (Kendi modelimiz) veya 'mobilenet' (Transfer Learning)
-    # Önce kendi modelimizi eğitiyoruz.
-    MODEL_TYPE = 'mobilenet' 
+    MODEL_TYPE = 'mobilenet'
+    """
+    str: Kullanılacak model tipi.
+         Seçenekler: 'custom_cnn' (Kendi modelimiz) veya 'mobilenet' (Transfer Learning)
+    """
     
-    # --- KRİTİK AYARLAR ---
-    # Tam eğitim için BURASI MUTLAKA FALSE OLMALI
-    DEBUG_MODE = False    
+    DEBUG_MODE = False
+    """
+    bool: Hata ayıklama modu.
+          True olduğunda veri seti küçültülür ve hızlı test için kullanılır.
+          Tam eğitim için False, kodların doğru çalıştığını görmek için True kullanılır.
+    """
     
-    # Bilimsel tekrarlanabilirlik için sabit tohum
-    SEED = 42             
+    SEED = 42
+    """
+    int: Rastgele sayı üreteci için sabit tohum değeri.
+         Bilimsel tekrarlanabilirlik için sabit tohum kullanılır.
+    """
     
-    # Sonuç klasörünü oluştur
     if not os.path.exists(RESULTS_DIR):
         os.makedirs(RESULTS_DIR)
