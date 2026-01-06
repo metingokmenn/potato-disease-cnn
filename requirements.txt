@@ -1,6 +1,7 @@
 tensorflow
-numpy
+numpy<2
 matplotlib
 scikit-learn
 seaborn
 pandas
+opencv-python
