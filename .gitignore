@@ -17,3 +17,5 @@ venv/
 .DS_Store
 
 custom_cnn_adam.keras
+custom_cnn_adam.h5
+
