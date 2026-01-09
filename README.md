@@ -1,51 +1,51 @@
-# Patates Hastalığı Sınıflandırma Projesi
+# Potato Disease Classification Project
 
-Bu proje, derin öğrenme (deep learning) teknikleri kullanarak patates yapraklarında görülen hastalıkları otomatik olarak sınıflandırmayı amaçlamaktadır. Proje, Convolutional Neural Network (CNN) ve Transfer Learning yaklaşımlarını kullanarak üç farklı sınıfı ayırt edebilir: Erken Yanıklık (Early Blight), Sağlıklı (Healthy) ve Geç Yanıklık (Late Blight).
+This project aims to automatically classify diseases seen in potato leaves using deep learning techniques. Using Convolutional Neural Network (CNN) and Transfer Learning approaches, the project can distinguish between three different classes: Early Blight, Healthy, and Late Blight.
 
-## 📋 İçindekiler
+## 📋 Table of Contents
 
-- [Proje Hakkında](#proje-hakkında)
-- [Özellikler](#özellikler)
-- [Gereksinimler](#gereksinimler)
-- [Kurulum](#kurulum)
-- [Veri Seti Yapısı](#veri-seti-yapısı)
-- [Kullanım](#kullanım)
-- [Proje Yapısı](#proje-yapısı)
-- [Yapılandırma](#yapılandırma)
-- [Sonuçlar](#sonuçlar)
-- [Sorun Giderme](#sorun-giderme)
+- [About the Project](#about-the-project)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Dataset Structure](#dataset-structure)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Configuration](#configuration)
+- [Results](#results)
+- [Troubleshooting](#troubleshooting)
 
-## 🎯 Proje Hakkında
+## 🎯 About the Project
 
-Bu proje, tarım alanında görüntü işleme ve makine öğrenmesi tekniklerini kullanarak patates bitkilerindeki hastalıkları otomatik olarak tespit etmeyi hedefler. Proje, iki farklı model mimarisi sunar:
+This project aims to automatically detect diseases in potato plants using image processing and machine learning techniques in the field of agriculture. The project offers two different model architectures:
 
-1. **Custom CNN**: Özgün tasarlanmış basit convolutional neural network
-2. **MobileNetV2**: Transfer learning ile ImageNet ağırlıklı MobileNetV2 tabanlı model
+1. **Custom CNN**: Uniquely designed simple convolutional neural network
+2. **MobileNetV2**: MobileNetV2-based model with ImageNet weights using transfer learning
 
-Her iki model de veri artırma (data augmentation), learning rate scheduling ve early stopping gibi gelişmiş tekniklerle optimize edilmiştir.
+Both models are optimized with advanced techniques such as data augmentation, learning rate scheduling, and early stopping.
 
-## ✨ Özellikler
+## ✨ Features
 
-- ✅ İki farklı model mimarisi desteği (Custom CNN ve MobileNetV2)
-- ✅ Üç farklı optimizer seçeneği (Adam, SGD with Momentum, RMSprop)
-- ✅ Otomatik veri bölme (80% eğitim, 10% doğrulama, 10% test)
-- ✅ Gelişmiş callback'ler (Learning Rate Scheduler, Early Stopping)
-- ✅ Detaylı performans metrikleri ve görselleştirmeler
-- ✅ Confusion matrix ve classification report oluşturma
-- ✅ Tek görüntü tahmin desteği
-- ✅ Veri seti temizleme araçları
+- ✅ Support for two different model architectures (Custom CNN and MobileNetV2)
+- ✅ Three different optimizer options (Adam, SGD with Momentum, RMSprop)
+- ✅ Automatic data splitting (80% training, 10% validation, 10% test)
+- ✅ Advanced callbacks (Learning Rate Scheduler, Early Stopping)
+- ✅ Detailed performance metrics and visualizations
+- ✅ Confusion matrix and classification report generation
+- ✅ Single image prediction support
+- ✅ Dataset cleaning tools
 
-## 📦 Gereksinimler
+## 📦 Requirements
 
-### Yazılım Gereksinimleri
+### Software Requirements
 
-- Python 3.8 veya üzeri
+- Python 3.8 or higher
 - TensorFlow 2.x
-- CUDA ve cuDNN (GPU desteği için opsiyonel)
+- CUDA and cuDNN (optional for GPU support)
 
-### Python Kütüphaneleri
+### Python Libraries
 
-Proje gereksinimleri `requirements.txt` dosyasında listelenmiştir:
+Project requirements are listed in the `requirements.txt` file:
 
 ```
 tensorflow
@@ -57,46 +57,48 @@ pandas
 opencv-python
 ```
 
-## 🚀 Kurulum
+## 🚀 Installation
 
-### 1. Projeyi İndirin
+### 1. Clone the Project
 
 ```bash
 git clone <repository-url>
 cd potato-disease-cnn
 ```
 
-### 2. Sanal Ortam Oluşturun (Önerilen)
+### 2. Create a Virtual Environment (Recommended)
 
 **Windows:**
+
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
 **Linux/Mac:**
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Gereksinimleri Yükleyin
+### 3. Install Requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. GPU Desteğini Kontrol Edin (Opsiyonel)
+### 4. Check GPU Support (Optional)
 
 ```bash
 python tensorflow_check.py
 ```
 
-Bu komut, sisteminizde kaç adet GPU bulunduğunu gösterir. GPU yoksa model CPU üzerinde çalışacaktır.
+This command shows how many GPUs are available on your system. If there is no GPU, the model will run on the CPU.
 
-## 📁 Veri Seti Yapısı
+## 📁 Dataset Structure
 
-Proje, aşağıdaki klasör yapısını bekler:
+The project expects the following folder structure:
 
 ```
 dataset/
@@ -114,229 +116,242 @@ dataset/
     └── ...
 ```
 
-**Önemli Notlar:**
-- Klasör isimleri tam olarak `Early_Blight`, `Healthy` ve `Late_Blight` olmalıdır
-- Görüntü formatları: JPG, JPEG, PNG desteklenir
-- Görüntüler otomatik olarak 224x224 boyutuna yeniden boyutlandırılır
+**Important Notes:**
 
-## 🛠️ Kullanım
+- Folder names must be exactly `Early_Blight`, `Healthy`, and `Late_Blight`
+- Image formats: JPG, JPEG, PNG are supported
+- Images are automatically resized to 224x224 dimensions
 
-### Adım 1: Veri Seti Hazırlığı
+## 🛠️ Usage
 
-Eğer veri setiniz macOS'tan aktarıldıysa veya bozuk dosyalar içeriyorsa, önce temizlik yapın:
+### Step 1: Dataset Preparation
 
-**macOS hayalet dosyalarını temizleme:**
+If your dataset was transferred from macOS or contains corrupt files, perform cleaning first:
+
+**Cleaning macOS ghost files:**
+
 ```bash
 python clean_mac_files.py
 ```
 
-**Derinlemesine temizlik (bozuk görüntüleri kontrol etme):**
+**Deep cleaning (checking for corrupt images):**
+
 ```bash
 python deep_clean.py
 ```
 
-### Adım 2: Yapılandırma Ayarları
+### Step 2: Configuration Settings
 
-`config.py` dosyasını açarak proje ayarlarını düzenleyin:
+Edit the project settings by opening the `config.py` file:
 
 ```python
-# Model seçimi
-MODEL_TYPE = 'mobilenet'  # 'custom_cnn' veya 'mobilenet'
+# Model selection
+MODEL_TYPE = 'mobilenet'  # 'custom_cnn' or 'mobilenet'
 
-# Optimizer seçimi
+# Optimizer selection
 OPTIMIZER = 'adam'  # 'adam', 'sgd_momentum', 'rmsprop'
 
-# Eğitim parametreleri
+# Training parameters
 BATCH_SIZE = 16
 EPOCHS = 30
 LEARNING_RATE = 0.001
 
-# Debug modu (hızlı test için)
-DEBUG_MODE = False  # Tam eğitim için False olmalı
+# Debug mode (for quick testing)
+DEBUG_MODE = False  # Should be False for full training
 ```
 
-### Adım 3: Model Eğitimi
+### Step 3: Model Training
 
-Ana eğitim scriptini çalıştırın:
+Run the main training script:
 
 ```bash
 python main.py
 ```
 
-Eğitim sırasında:
-- Veri seti otomatik olarak yüklenir ve bölünür
-- Model oluşturulur ve derlenir
-- Eğitim başlar ve ilerleme konsola yazdırılır
-- Callback'ler otomatik olarak çalışır (learning rate scheduling, early stopping)
+During training:
 
-### Adım 4: Sonuçları İnceleme
+- The dataset is automatically loaded and split
+- The model is created and compiled
+- Training starts and progress is printed to the console
+- Callbacks run automatically (learning rate scheduling, early stopping)
 
-Eğitim tamamlandıktan sonra, `results/` klasöründe şu dosyalar oluşturulur:
+### Step 4: Reviewing Results
 
-- `{model_type}_{optimizer}.keras`: Eğitilmiş model dosyası
-- `history_graphs.png`: Eğitim süreci grafikleri (loss ve accuracy)
-- `Training_confusion_matrix.png`: Eğitim seti confusion matrix
-- `Test_confusion_matrix.png`: Test seti confusion matrix
-- `Training_classification_report.txt`: Eğitim seti detaylı metrikler
-- `Test_classification_report.txt`: Test seti detaylı metrikler
-- `train_vs_test_comparison.png`: Eğitim ve test metriklerinin karşılaştırması
+After training is complete, the following files are created in the `results/` folder:
 
-### Adım 5: Tahmin Yapma
+- `{model_type}_{optimizer}.keras`: Trained model file
+- `history_graphs.png`: Training process graphs (loss and accuracy)
+- `Training_confusion_matrix.png`: Training set confusion matrix
+- `Test_confusion_matrix.png`: Test set confusion matrix
+- `Training_classification_report.txt`: Training set detailed metrics
+- `Test_classification_report.txt`: Test set detailed metrics
+- `train_vs_test_comparison.png`: Comparison of training and test metrics
 
-Eğitilmiş model ile yeni görüntüler üzerinde tahmin yapmak için:
+### Step 5: Making Predictions
 
-1. `prediction.py` dosyasını açın
-2. `MODEL_PATH` değişkenini eğitilmiş model yoluna ayarlayın:
+To make predictions on new images with the trained model:
+
+1. Open the `prediction.py` file
+2. Set the `MODEL_PATH` variable to the path of the trained model:
    ```python
    MODEL_PATH = 'results/mobilenet_adam.keras'
    ```
-3. Test görüntüsünü proje klasörüne koyun (örn: `test_image.jpg`)
-4. Scripti çalıştırın:
+3. Place the test image in the project folder (e.g., `test_image.jpg`)
+4. Run the script:
    ```bash
    python prediction.py
    ```
 
-Alternatif olarak, Python'da doğrudan kullanabilirsiniz:
+Alternatively, you can use it directly in Python:
 
 ```python
 from prediction import predict_image
 predict_image("test_image.jpg")
 ```
 
-## 📂 Proje Yapısı
+## 📂 Project Structure
 
 ```
 potato-disease-cnn/
-├── config.py              # Proje yapılandırma ayarları
-├── data_loader.py         # Veri yükleme ve bölme fonksiyonları
-├── models.py              # Model mimarileri (Custom CNN, MobileNetV2)
-├── main.py                # Ana eğitim scripti
-├── evaluation.py          # Performans değerlendirme ve görselleştirme
-├── prediction.py          # Tek görüntü tahmin scripti
-├── clean_mac_files.py     # macOS hayalet dosya temizleme
-├── deep_clean.py         # Bozuk görüntü kontrolü ve temizleme
-├── tensorflow_check.py    # GPU kontrolü
-├── requirements.txt      # Python bağımlılıkları
-├── dataset/              # Veri seti klasörü
+├── config.py              # Project configuration settings
+├── data_loader.py         # Data loading and splitting functions
+├── models.py              # Model architectures (Custom CNN, MobileNetV2)
+├── main.py                # Main training script
+├── evaluation.py          # Performance evaluation and visualization
+├── prediction.py          # Single image prediction script
+├── clean_mac_files.py     # macOS ghost file cleaning
+├── deep_clean.py         # Corrupt image check and cleaning
+├── tensorflow_check.py    # GPU check
+├── requirements.txt      # Python dependencies
+├── dataset/              # Dataset folder
 │   ├── Early_Blight/
 │   ├── Healthy/
 │   └── Late_Blight/
-└── results/              # Eğitim sonuçları (otomatik oluşturulur)
-    ├── *.keras           # Eğitilmiş modeller
-    ├── *.png             # Grafikler
-    └── *.txt             # Metrik raporları
+└── results/              # Training results (automatically generated)
+    ├── *.keras           # Trained models
+    ├── *.png             # Graphs
+    └── *.txt             # Metric reports
 ```
 
-## ⚙️ Yapılandırma
+## ⚙️ Configuration
 
-### Config.py Parametreleri
+### Config.py Parameters
 
-| Parametre | Açıklama | Varsayılan Değer |
-|-----------|----------|------------------|
-| `DATASET_DIR` | Veri seti klasör yolu | `"dataset"` |
-| `RESULTS_DIR` | Sonuçlar klasör yolu | `"results"` |
-| `IMG_HEIGHT` | Görüntü yüksekliği (piksel) | `224` |
-| `IMG_WIDTH` | Görüntü genişliği (piksel) | `224` |
-| `BATCH_SIZE` | Batch boyutu | `16` |
-| `EPOCHS` | Maksimum epoch sayısı | `30` |
-| `LEARNING_RATE` | Öğrenme hızı | `0.001` |
-| `OPTIMIZER` | Optimizer tipi | `'adam'` |
-| `MODEL_TYPE` | Model mimarisi | `'mobilenet'` |
-| `DEBUG_MODE` | Hata ayıklama modu | `False` |
-| `SEED` | Rastgele sayı tohumu | `42` |
+| Parameter       | Description              | Default Value |
+| --------------- | ------------------------ | ------------- |
+| `DATASET_DIR`   | Dataset folder path      | `"dataset"`   |
+| `RESULTS_DIR`   | Results folder path      | `"results"`   |
+| `IMG_HEIGHT`    | Image height (pixels)    | `224`         |
+| `IMG_WIDTH`     | Image width (pixels)     | `224`         |
+| `BATCH_SIZE`    | Batch size               | `16`          |
+| `EPOCHS`        | Maximum number of epochs | `30`          |
+| `LEARNING_RATE` | Learning rate            | `0.001`       |
+| `OPTIMIZER`     | Optimizer type           | `'adam'`      |
+| `MODEL_TYPE`    | Model architecture       | `'mobilenet'` |
+| `DEBUG_MODE`    | Debug mode               | `False`       |
+| `SEED`          | Random number seed       | `42`          |
 
-### Model Tipleri
+### Model Types
 
 **Custom CNN:**
-- 3 Conv2D bloğu (32, 64, 128 filtre)
-- MaxPooling2D katmanları
-- Dense katmanlar (128 nöron)
-- Dropout (0.5) ile overfitting önleme
+
+- 3 Conv2D blocks (32, 64, 128 filters)
+- MaxPooling2D layers
+- Dense layers (128 neurons)
+- Overfitting prevention with Dropout (0.5)
 
 **MobileNetV2:**
-- ImageNet ağırlıklı MobileNetV2 taban modeli (dondurulmuş)
-- GlobalAveragePooling2D katmanı
-- Dropout (0.2) katmanı
-- Özel sınıflandırma kafası
 
-### Optimizer Seçenekleri
+- ImageNet weighted MobileNetV2 base model (frozen)
+- GlobalAveragePooling2D layer
+- Dropout (0.2) layer
+- Custom classification head
 
-- **Adam**: Adaptif öğrenme hızı, genellikle en iyi performans
-- **SGD with Momentum**: Momentum değeri 0.9 ile klasik optimizasyon
-- **RMSprop**: Adaptif öğrenme hızı, RNN'ler için popüler
+### Optimizer Options
 
-## 📊 Sonuçlar
+- **Adam**: Adaptive learning rate, generally best performance
+- **SGD with Momentum**: Classic optimization with momentum value of 0.9
+- **RMSprop**: Adaptive learning rate, popular for RNNs
 
-Eğitim tamamlandıktan sonra, `results/` klasöründe şu çıktılar oluşturulur:
+## 📊 Results
 
-### Model Dosyası
+After training is complete, the following outputs are generated in the `results/` folder:
+
+### Model File
+
 - Format: `.keras`
-- İsimlendirme: `{model_type}_{optimizer}.keras`
-- Örnek: `mobilenet_adam.keras`
+- Naming: `{model_type}_{optimizer}.keras`
+- Example: `mobilenet_adam.keras`
 
-### Görselleştirmeler
-- **history_graphs.png**: Epoch bazında loss ve accuracy grafikleri
-- **Training_confusion_matrix.png**: Eğitim seti karışıklık matrisi
-- **Test_confusion_matrix.png**: Test seti karışıklık matrisi
-- **train_vs_test_comparison.png**: Eğitim ve test metriklerinin karşılaştırmalı grafiği
+### Visualizations
 
-### Metrik Raporları
-- **Training_classification_report.txt**: Eğitim seti için precision, recall, F1-score
-- **Test_classification_report.txt**: Test seti için precision, recall, F1-score
+- **history_graphs.png**: Loss and accuracy graphs per epoch
+- **Training_confusion_matrix.png**: Training set confusion matrix
+- **Test_confusion_matrix.png**: Test set confusion matrix
+- **train_vs_test_comparison.png**: Comparative graph of training and test metrics
 
-## 🔧 Sorun Giderme
+### Metric Reports
 
-### GPU Bulunamıyor
+- **Training_classification_report.txt**: Precision, recall, F1-score for the training set
+- **Test_classification_report.txt**: Precision, recall, F1-score for the test set
 
-**Sorun:** `UYARI: GPU bulunamadı. CPU kullanılıyor.`
+## 🔧 Troubleshooting
 
-**Çözüm:**
-- CUDA ve cuDNN'in doğru kurulu olduğundan emin olun
-- TensorFlow GPU sürümünün yüklü olduğunu kontrol edin: `pip install tensorflow-gpu`
-- GPU sürücülerinin güncel olduğundan emin olun
+### GPU Not Found
 
-### Out of Memory (OOM) Hatası
+**Issue:** `WARNING: GPU not found. Using CPU.`
 
-**Sorun:** `ResourceExhaustedError: OOM when allocating tensor`
+**Solution:**
 
-**Çözüm:**
-- `config.py` dosyasında `BATCH_SIZE` değerini küçültün (örn: 32 → 16)
-- Model tipini `custom_cnn` olarak değiştirin (daha az parametre)
-- Görüntü boyutunu küçültün (224 → 128)
+- Ensure CUDA and cuDNN are correctly installed
+- Check if TensorFlow GPU version is installed: `pip install tensorflow-gpu`
+- Ensure GPU drivers are up to date
 
-### Veri Seti Bulunamıyor
+### Out of Memory (OOM) Error
 
-**Sorun:** `FileNotFoundError: dataset klasörü bulunamadı`
+**Issue:** `ResourceExhaustedError: OOM when allocating tensor`
 
-**Çözüm:**
-- `dataset/` klasörünün proje kök dizininde olduğundan emin olun
-- Klasör isimlerinin doğru olduğunu kontrol edin: `Early_Blight`, `Healthy`, `Late_Blight`
+**Solution:**
 
-### Bozuk Görüntü Hatası
+- Decrease the `BATCH_SIZE` value in the `config.py` file (e.g., 32 → 16)
+- Change the model type to `custom_cnn` (fewer parameters)
+- Reduce the image size (224 → 128)
 
-**Sorun:** Eğitim sırasında görüntü decode hatası
+### Dataset Not Found
 
-**Çözüm:**
+**Issue:** `FileNotFoundError: dataset folder not found`
+
+**Solution:**
+
+- Ensure the `dataset/` folder is in the project root directory
+- Check that folder names are correct: `Early_Blight`, `Healthy`, `Late_Blight`
+
+### Corrupt Image Error
+
+**Issue:** Image decode error during training
+
+**Solution:**
+
 ```bash
 python deep_clean.py
 ```
 
-Bu script, bozuk görüntü dosyalarını otomatik olarak tespit eder ve siler.
+This script automatically detects and deletes corrupt image files.
 
-### Model Dosyası Bulunamıyor (Tahmin için)
+### Model File Not Found (For Prediction)
 
-**Sorun:** `HATA: Model dosyası bulunamadı`
+**Issue:** `ERROR: Model file not found`
 
-**Çözüm:**
-- `prediction.py` dosyasındaki `MODEL_PATH` değişkenini kontrol edin
-- Model dosyasının `results/` klasöründe olduğundan emin olun
-- Dosya adının doğru olduğunu kontrol edin (örn: `mobilenet_adam.keras`)
+**Solution:**
 
-## 📝 Notlar
+- Check the `MODEL_PATH` variable in the `prediction.py` file
+- Ensure the model file is in the `results/` folder
+- Check that the filename is correct (e.g., `mobilenet_adam.keras`)
 
-- Eğitim süresi, veri seti boyutuna ve kullanılan donanıma bağlıdır
-- GPU kullanımı eğitim süresini önemli ölçüde kısaltır
-- Early stopping sayesinde model gereksiz yere uzun süre eğitilmez
-- Learning rate scheduler, modelin daha iyi öğrenmesine yardımcı olur
-- Debug modu (`DEBUG_MODE = True`), hızlı test için veri setini küçültür ve kodlarda hata olup olmadığını görmek için kullanılır
+## 📝 Notes
 
+- Training time depends on the dataset size and the hardware used
+- GPU usage significantly reduces training time
+- Early stopping prevents the model from being trained for unnecessarily long periods
+- Learning rate scheduler helps the model learn better
+- Debug mode (`DEBUG_MODE = True`) reduces the dataset size for quick testing and is used to see if there are errors in the code
