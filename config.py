@@ -45,9 +45,7 @@ class Config:
     BATCH_SIZE = 16
     """
     int: Eğitim sırasında kullanılacak batch (toplu işlem) boyutu.
-         RTX 3060 (12GB VRAM) için 32 güvenlidir. 
-         Eğer "OOM (Out of Memory)" hatası almazsanız 64 yapıp hızı artırabilirsiniz.
-         BATCH_SIZE = 32 ile denendi ve Out of Memory hatası alındı.
+         BATCH_SIZE = 32 ile denendi ve Out of Memory hatası alındı. RTX3060 (12GB VRAM) için 16 önerilir.
     """
     
     
